@@ -1,0 +1,103 @@
+# Simple Electronics Shop
+# This program uses input, if statements, lists, and dictionaries.
+
+phones = [
+    {"name": "iPhone 15", "price": 109999},
+    {"name": "Samsung Galaxy S24", "price": 49998},
+    {"name": "iQOO Z10", "price": 35000},
+    {"name": "Redmi Note 14", "price": 20000}
+]
+
+laptops = [
+    {"name": "MacBook Air M1", "price": 99999},
+    {"name": "MacBook Pro M3", "price": 179999},
+    {"name": "Lenovo LOQ RTX 3050", "price": 99999}
+]
+
+cart = []
+
+print("Welcome to the Electronics Shop!")
+
+while True:
+    print("\nWhat do you want to do?")
+    print("1. Buy a phone")
+    print("2. Buy a laptop")
+    print("3. See my cart")
+    print("4. Checkout")
+    print("5. Exit")
+
+    choice = input("Enter 1, 2, 3, 4, or 5: ")
+
+    if choice == "1":
+        print("\nPhones:")
+        for number in range(len(phones)):
+            phone = phones[number]
+            print(str(number + 1) + ". " + phone["name"] + " - Rs. " + str(phone["price"]))
+
+        phone_choice = input("Choose a phone number: ")
+
+        if phone_choice.isdigit():
+            phone_choice = int(phone_choice)
+
+            if phone_choice >= 1 and phone_choice <= len(phones):
+                chosen_phone = phones[phone_choice - 1]
+                cart.append(chosen_phone)
+                print(chosen_phone["name"] + " added to your cart.")
+            else:
+                print("That number is not in the list.")
+        else:
+            print("Please enter a number.")
+
+    elif choice == "2":
+        print("\nLaptops:")
+        for number in range(len(laptops)):
+            laptop = laptops[number]
+            print(str(number + 1) + ". " + laptop["name"] + " - Rs. " + str(laptop["price"]))
+
+        laptop_choice = input("Choose a laptop number: ")
+
+        if laptop_choice.isdigit():
+            laptop_choice = int(laptop_choice)
+
+            if laptop_choice >= 1 and laptop_choice <= len(laptops):
+                chosen_laptop = laptops[laptop_choice - 1]
+                cart.append(chosen_laptop)
+                print(chosen_laptop["name"] + " added to your cart.")
+            else:
+                print("That number is not in the list.")
+        else:
+            print("Please enter a number.")
+
+    elif choice == "3":
+        if len(cart) == 0:
+            print("Your cart is empty.")
+        else:
+            total = 0
+            print("\nYour cart:")
+
+            for number in range(len(cart)):
+                item = cart[number]
+                print(item["name"] + " - Rs. " + str(item["price"]))
+                total = total + item["price"]
+
+            print("Total: Rs. " + str(total))
+
+    elif choice == "4":
+        if len(cart) == 0:
+            print("Your cart is empty. Add something before checkout.")
+        else:
+            total = 0
+
+            for number in range(len(cart)):
+                total = total + cart[number]["price"]
+
+            print("Your total is Rs. " + str(total))
+            print("Thank you for shopping with us!")
+            cart = []
+
+    elif choice == "5":
+        print("Goodbye!")
+        break
+
+    else:
+        print("Please choose a number from 1 to 5.")
